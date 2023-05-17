@@ -32,6 +32,8 @@ public class ServletLogin extends HttpServlet {
 			throws ServletException, IOException {
 		String login = request.getParameter("login");
 		String senha = request.getParameter("senha");
+		// vem da index.jsp(campo hidden)
+		String url = request.getParameter("url");
 
 		if (login != null && !login.isEmpty() && senha != null && !senha.isEmpty()) {
 			ModelLogin modelLogin = new ModelLogin();
@@ -40,8 +42,13 @@ public class ServletLogin extends HttpServlet {
 
 			// simulando login
 			if (modelLogin.getLogin().equalsIgnoreCase("admin") && modelLogin.getSenha().equalsIgnoreCase("admin")) {
+				// coloca na sessao, pode ser pego de qualquer lugar do sistema
 				request.getSession().setAttribute("usuario", modelLogin);
-				RequestDispatcher redirecionar = request.getRequestDispatcher("principal/principal.jsp");
+				if (url == null || url.equals("null")) {
+					url = "principal/principal.jsp";
+				}
+
+				RequestDispatcher redirecionar = request.getRequestDispatcher(url);
 				redirecionar.forward(request, response);
 			} else {
 				RequestDispatcher redirecionar = request.getRequestDispatcher("index.jsp");
