@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <jsp:include page="head.jsp"></jsp:include>
 
 <body>
@@ -79,6 +79,9 @@
 															<button type="button"
 																class="btn btn-info waves-effect waves-light"
 																onclick="criaDeleteComAjax();">Excluir</button>
+															<button type="button" class="btn btn-secundary"
+																data-toggle="modal" data-target="#modalUsuario">
+																Consultar</button>
 														</form>
 													</div>
 												</div>
@@ -100,6 +103,28 @@
 
 	<jsp:include page="js-file.jsp"></jsp:include>
 
+	<!-- Modal -->
+	<div class="modal fade" id="modalUsuario" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">Consulta
+						usário</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">...</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Fechar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<script type="text/javascript">
 		function criaDeleteComAjax() {
 			if (confirm('Deseja realmente excluir os dados?')) {
@@ -115,6 +140,7 @@
 					success : function(response) {
 
 						limparForm();
+						alert(response);//aleta do javascript
 						document.getElementById('msg').textContent = response;
 					}
 
